@@ -17,6 +17,7 @@ const slides = [
   }
 ];
 
+
 // Variables
 const img = document.querySelector('.banner-img')
 const tagLine = document.querySelector('p')
@@ -27,9 +28,10 @@ const leftArrow = document.querySelector('.arrow_left')
 // The index of the current slide, which also means that the 1st image of the slides table will be displayed when the page load
 let indexSlide = 0
 
+
 /* rightArrow addEventlistener */
 rightArrow.addEventListener('click', function() {
-  indexSlide++; // Incrémentation pour passer à la slide suivante
+  indexSlide++; // Increment to go to the next slide
   if (indexSlide >= slides.length) {
     indexSlide = 0
   }
@@ -38,17 +40,16 @@ rightArrow.addEventListener('click', function() {
 
 /* leftArrow addEventlistener */
 leftArrow.addEventListener('click', function() {
-  indexSlide--; // Décrémentation pour revenir à la slide précédente
-  if (indexSlide < 0) { // Si le slide est inférieur à zéro
-    indexSlide = slides.length - 1; // Alors le slide affiché doit être le dernier
+  indexSlide--; // Decrement to return to the previous slide
+  if (indexSlide < 0) { // If the slide is less than zero
+    indexSlide = slides.length - 1; // then the displayed slide must be the last one
   }
   updateSlide()
 });
 
-
 // Update the slide: img, tagLine and .dot_selected
 function updateSlide() {
-  const slide = slides[indexSlide] // Récupère l'objet slide correspondant à l'index indexSlide
+  const slide = slides[indexSlide] // Retrieves the slide object corresponding to the index indexSlide
   img.src = "./assets/images/slideshow/" + slide.image
   tagLine.innerHTML = slide.tagLine
 
