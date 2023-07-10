@@ -24,9 +24,8 @@ const dotsContainer = document.querySelector('.dots')
 const rightArrow = document.querySelector('.arrow_right')
 const leftArrow = document.querySelector('.arrow_left')
 
-// L'index du slide en cours, ce qui signifie aussi que la 1ère image du tableau slides sera affichée au chargement de la page
+// The index of the current slide, which also means that the 1st image of the slides table will be displayed when the page load
 let indexSlide = 0
-
 
 /* rightArrow addEventlistener */
 rightArrow.addEventListener('click', function() {
@@ -47,38 +46,32 @@ leftArrow.addEventListener('click', function() {
 });
 
 
-// Mise à jour de l'affichage du slide en fonction de l'index actuel currentSlide
+// Update the slide: img, tagLine and .dot_selected
 function updateSlide() {
-  // Récupère l'objet slide correspondant à l'index currentSlide
-  const slide = slides[indexSlide] // slides[1]
-  img.src = "./assets/images/slideshow/" + slide.image // Met à jour l'image du slide
-  tagLine.innerHTML = slide.tagLine // Met à jour le texte du slide
+  const slide = slides[indexSlide] // Récupère l'objet slide correspondant à l'index indexSlide
+  img.src = "./assets/images/slideshow/" + slide.image
+  tagLine.innerHTML = slide.tagLine
 
-  // Mise à jour du bullet point actif
+  // Update active bullet points
   const dots = dotsContainer.querySelectorAll('.dot');
-  // Parcours tous les bullet points
-  for (let i = 0; i < dots.length; i++) {
-    const dot = dots[i]
-    // Vérifie si l'index du bullet point correspond à l'index du slide actuel
+  dots.forEach((dot, i) => {
     if (i === indexSlide) {
-      // Si c'est le cas, ajoute la classe 'dot_selected' pour indiquer le point actif
-      dot.classList.add('dot_selected')
+      dot.classList.add('dot_selected');
     } else {
-      // Sinon, retire la classe 'dot_selected'
-      dot.classList.remove('dot_selected')
+      dot.classList.remove('dot_selected');
     }
-  }
+  });
 }
 
-// Ajout des bullet points en fonction du nombre de slide
+// Calculates bullet points based on the number of slides
 for (let i = 0; i < slides.length; i++) {
   const dot = document.createElement('div')
   dot.classList.add('dot')
   dotsContainer.appendChild(dot)
 }
 
-// Ajoute la classe "dot_selected" au premier enfant du conteneur dotsContainer
+// Add .dot_selected to the first child of the dotsContainer
 dotsContainer.children[0].classList.add('dot_selected')
 
-// Affiche le premier slide au chargement de la page
+// Display the first slide when page loading
 updateSlide()
